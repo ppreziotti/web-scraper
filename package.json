@@ -1,0 +1,27 @@
+{
+  "name": "web-scraper",
+  "version": "1.0.0",
+  "description": "Interactive site that allows users to comment on news articles that are scraped from another wesbite. Utilizes Mongoose and Cheerio.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ppreziotti/web-scraper.git"
+  },
+  "author": "Patrick Preziotti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ppreziotti/web-scraper/issues"
+  },
+  "homepage": "https://github.com/ppreziotti/web-scraper#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.1",
+    "express": "^4.15.3",
+    "express-handlebars": "^3.0.0",
+    "mongoose": "^4.11.0",
+    "request": "^2.81.0"
+  }
+}
