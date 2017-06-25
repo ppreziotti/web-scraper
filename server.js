@@ -38,7 +38,47 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
+// Set up handlebars, use main.handlebars as the default html layout, and establish handlebars as
+// the default templating engine
+app.engine("handlebars", exphbs({ defaultLayout: "main"}));
+app.set("view engine", "handlebars");
+
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
+});
+
+// ROUTES--------------------------
+
+app.get("/", function(req, res) {
+  request("http://www.npr.org", function(error, response, html) {
+  	var $ = cheerio.load(html);
+  	var result = {};
+
+  	$("h1.title").each(function(i, element) {
+  	  result.title = $(this).text();
+  	  result.link = $(element).parent().attr("href");
+  	  var entry = new Article(result);
+  	  entry.save(function(err, doc) {
+  	  	if (err) {
+  	  	  console.log(err);
+  	  	}
+  	  	else {
+  	  	  console.log(doc);
+  	  	}
+  	  });
+  	});
+  });
+
+  Article.find({}, function(error, articles) {
+  	if (error) {
+  	  res.send(error)
+  	}
+  	else {
+  	  var hbsObject = {
+  	  	Article: articles
+  	  }
+  	  res.render("index", hbsObject);
+  	}
+  });
 });
