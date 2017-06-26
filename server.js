@@ -51,6 +51,10 @@ app.listen(PORT, function() {
 // ROUTES--------------------------
 
 app.get("/", function(req, res) {
+  res.render("index");
+});
+
+app.get("/scrape", function(req, res) {
   request("http://www.npr.org", function(error, response, html) {
   	var $ = cheerio.load(html);
   	var result = {};
@@ -78,7 +82,7 @@ app.get("/", function(req, res) {
   	  var hbsObject = {
   	  	Article: articles
   	  }
-  	  res.render("index", hbsObject);
+  	  res.render("scrape", hbsObject);
   	}
   });
 });
