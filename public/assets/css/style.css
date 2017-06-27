@@ -2,3 +2,7 @@
   background-image: url("../images/technics-q-c-1200-600-4.jpg");
   background-size: cover;
 }
+
+body {
+  background-color: #70B7BF;
+}

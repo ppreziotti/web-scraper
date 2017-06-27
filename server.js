@@ -3,14 +3,9 @@ var express = require("express");
 var exphbs = require("express-handlebars");
 var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-// Scraping tools
-var cheerio = require("cheerio");
-var request = require("request");
+
 // Setting Mongoose to leverage built-in JavaScript ES6 Promises
 mongoose.Promise = Promise;
-// Requiring Models
-var Article = require("./models/Article.js");
-var Comment = require("./models/Comment.js");
 
 // Initialize express
 var app = express();
@@ -43,46 +38,11 @@ db.once("open", function() {
 app.engine("handlebars", exphbs({ defaultLayout: "main"}));
 app.set("view engine", "handlebars");
 
+// Import routes and give the server access to them.
+// require("./routes/api-routes.js")(app);
+require("./routes/html-routes.js")(app);
+
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App listening on PORT " + PORT);
-});
-
-// ROUTES--------------------------
-
-app.get("/", function(req, res) {
-  res.render("index");
-});
-
-app.get("/scrape", function(req, res) {
-  request("http://www.npr.org", function(error, response, html) {
-  	var $ = cheerio.load(html);
-  	var result = {};
-
-  	$("h1.title").each(function(i, element) {
-  	  result.title = $(this).text();
-  	  result.link = $(element).parent().attr("href");
-  	  var entry = new Article(result);
-  	  entry.save(function(err, doc) {
-  	  	if (err) {
-  	  	  console.log(err);
-  	  	}
-  	  	else {
-  	  	  console.log(doc);
-  	  	}
-  	  });
-  	});
-  });
-
-  Article.find({}, function(error, articles) {
-  	if (error) {
-  	  res.send(error)
-  	}
-  	else {
-  	  var hbsObject = {
-  	  	Article: articles
-  	  }
-  	  res.render("scrape", hbsObject);
-  	}
-  });
 });
