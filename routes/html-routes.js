@@ -12,34 +12,47 @@ module.exports = function(app) {
 
   app.get("/scrape", function(req, res) {
     request("http://www.npr.org", function(error, response, html) {
-    	var $ = cheerio.load(html);
-    	var result = {};
+      var $ = cheerio.load(html);
+      var result = {};
 
-    	$("h1.title").each(function(i, element) {
-    	  result.title = $(this).text();
-    	  result.link = $(element).parent().attr("href");
-    	  var entry = new Article(result);
-    	  entry.save(function(err, doc) {
-    	  	if (err) {
-    	  	  console.log(err);
-    	  	}
-    	  	else {
-    	  	  console.log(doc);
-    	  	}
-    	  });
+      $("h1.title").each(function(i, element) {
+        result.title = $(this).text();
+        result.link = $(element).parent().attr("href");
+        var entry = new Article(result);
+        entry.save(function(err, doc) {
+          if (err) {
+    	    console.log(err);
+    	  }
+    	  else {
+    	    console.log(doc);
+    	  }
     	});
+      });
     });
     
     Article.find({}, function(error, articles) {
-    	if (error) {
-    	  res.send(error)
+      if (error) {
+	    res.send(error)
+      }
+      else {
+        var hbsObject = {
+      	  Article: articles
     	}
-    	else {
-    	  var hbsObject = {
-    	  	Article: articles
-    	  }
-    	  res.render("scrape", hbsObject);
-    	}
+    	res.render("scrape", hbsObject);
+      }
+    });
+  });
+
+  app.get("/saved", function(req, res) {
+    Article.find({saved: true}, function(error, articles) {
+      if (error) {
+        res.send(error)      }
+      else {
+        var hbsObject = {
+          Article: articles
+        }
+        res.render("saved", hbsObject);
+      }
     });
   });
 };
