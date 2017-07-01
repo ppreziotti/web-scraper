@@ -4,5 +4,4 @@ $("#scrape").on("click", function() {
 
 $(".btn-save").on("click", function() {
   event.preventDefault();
-  Article.findOneAndUpdate({})
 });

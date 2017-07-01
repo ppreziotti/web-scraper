@@ -21,32 +21,35 @@ module.exports = function(app) {
         var entry = new Article(result);
         entry.save(function(err, doc) {
           if (err) {
-    	    console.log(err);
-    	  }
-    	  else {
-    	    console.log(doc);
-    	  }
+    	      console.log(err);
+          }
+    	    else {
+    	      console.log(doc);
+    	    }
+        });
     	});
-      });
     });
     
     Article.find({}, function(error, articles) {
       if (error) {
-	    res.send(error)
+	      res.send(error);
       }
       else {
         var hbsObject = {
       	  Article: articles
-    	}
-    	res.render("scrape", hbsObject);
+        }
+    	  res.render("scrape", hbsObject);
       }
     });
   });
 
   app.get("/saved", function(req, res) {
-    Article.find({saved: true}, function(error, articles) {
+    Article.find({saved: true})
+    .populate("comment")
+    .exec(function(error, articles) {
       if (error) {
-        res.send(error)      }
+        console.log(error);
+      }
       else {
         var hbsObject = {
           Article: articles

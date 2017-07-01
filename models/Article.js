@@ -12,13 +12,17 @@ var ArticleSchema = new Schema({
   	required: true,
   	unique: true
   },
+  scrapedDate :{
+    type: Date,
+    default: Date.now()
+  },
   saved: {
     type: Boolean,
     default: false
   },
-  note: {
+  comment: {
   	type: Schema.Types.ObjectId,
-  	ref: "Article"
+  	ref: "Comment"
   }
 });
 
