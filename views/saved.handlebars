@@ -5,7 +5,9 @@
       {{#if this.saved}}
     	  <div class="panel panel-default">
           <div class="panel-heading">
-            <h3>{{this.title}}<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#commentModal">Comments</button></h3>
+            <h3>{{this.title}}</h3>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#commentModal">Comments</button>
+            <button type="button" class="btn btn-primary btn-lg btn-delete">Delete Article</button>
           </div>
           <div class="panel-body"><a href="{{this.link}}">{{this.link}}</a></div>
         </div>

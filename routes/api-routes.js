@@ -8,4 +8,8 @@ module.exports = function(app) {
       res.json(articles);
     });
   });
+
+  app.put("/api/articles", function(req, res) {
+  	Article.findOneAndUpdate();
+  });
 };

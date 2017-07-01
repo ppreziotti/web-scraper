@@ -30,7 +30,7 @@ module.exports = function(app) {
     	});
     });
     
-    Article.find({}, function(error, articles) {
+    Article.find({}, null, {sort: {scrapedDate: -1}}, function(error, articles) {
       if (error) {
 	      res.send(error);
       }
@@ -44,7 +44,7 @@ module.exports = function(app) {
   });
 
   app.get("/saved", function(req, res) {
-    Article.find({saved: true})
+    Article.find({saved: true}, null, {sort: {scrapedDate: -1}})
     .populate("comment")
     .exec(function(error, articles) {
       if (error) {
