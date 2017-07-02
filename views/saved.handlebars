@@ -7,33 +7,23 @@
           <div class="panel-heading">
             <h3>
               {{this.title}}
-              <button type="button" class="btn btn-primary btn-lg btn-comment" data-toggle="modal" data-target="#commentModal" data-title="{{this.title}}">Comments</button>
+              <button type="button" class="btn btn-primary btn-lg btn-comment" data-title="{{this.title}}">Comments</button>
               <button type="button" class="btn btn-primary btn-lg btn-delete" data-title="{{this.title}}">Delete Article</button>
             </h3>
           </div>
-          <div class="panel-body"><a href="{{this.link}}">{{this.link}}</a></div>
+          <div class="panel-body">
+            <a href="{{this.link}}">{{this.link}}</a>
+          </div>
         </div>
+        <form>
+          <div class="form-group">
+            <p>{{this.title}}</p>
+            <label for="exampleTextarea">Example textarea</label>
+            <textarea class="form-control" id="comment-input" rows="3"></textarea>
+            <button type="submit" class="btn btn-primary btn-lg btn-post-comment" data-title="{{this.title}}">Submit Comment</button>
+          </div>
       {{/if}}
     {{/each}}
   </div>
-
- {{!--  <!-- Modal -->
-  <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div> --}}
 
 </div>

@@ -24,6 +24,25 @@ $(document).ready(function() {
     });
   }
 
+  function showModal() {
+  	var modal = document.getElementById("comment-modal");
+  	modal.style.display = "block";
+  }
+
+  function postComment() {
+  	var title = $(this).data("title");
+	$.ajax({
+	  method: "POST",
+	  url: "/api/articles/" + title,
+	  data: {
+	    body: $("#comment-input").val()
+   	  }
+	}).done(function(data) {
+	  console.log(data);
+	});
+  }
+
   $(document).on("click", ".btn-save", saveArticle);
   $(document).on("click", ".btn-delete", deleteArticle);
+  $(document).on("click", ".btn-post-comment", postComment);
 });

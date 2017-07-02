@@ -37,6 +37,28 @@ module.exports = function(app) {
   	});
   });
 
+  // Post route for adding a comment to an article
+  app.post("/api/articles/:title", function(req, res) {
+  	var newComment = new Comment(req.body);
+
+  	newComment.save(function(error, doc) {
+  	  if (error) {
+  	    console.log(error)
+  	  }
+  	  else {
+  	  	Article.findOneAndUpdate({title: req.params.title}, {comment: req.body.data})
+  	  	.exec(function(err, doc) {
+  	  	  if (err) {
+  	  	  	console.log(err);
+  	  	  }
+  	  	  else {
+  	  	  	res.send(doc);
+  	  	  }
+  	  	});
+  	  }
+  	});
+  });
+
   app.delete("/api/articles/:title", function(req, res) {
   	Article.remove({title: req.params.title}, function(error) {
   	  if (error) {
