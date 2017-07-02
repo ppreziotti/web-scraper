@@ -1,7 +1,22 @@
-$("#scrape").on("click", function() {
-  window.location = "/scrape";
-});
+$(document).ready(function() {
 
-$(".btn-save").on("click", function() {
-  event.preventDefault();
+  $("#scrape").on("click", function() {
+    window.location = "/scrape";
+  });
+
+  function saveArticle() {
+    event.preventDefault();
+
+    var title = $(this).data("title");
+
+	$.ajax({
+      method: "PUT",
+	  url: "/api/articles/" + title,
+	  success: function() {
+	    alert("Article saved successfully!");
+	  }
+	});
+  }
+
+  $(document).on("click", ".btn-save", saveArticle);
 });

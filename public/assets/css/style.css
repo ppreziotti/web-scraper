@@ -1,8 +1,9 @@
-.jumbotron {
-  background-image: url("../images/technics-q-c-1200-600-4.jpg");
+body {
+  background-image: url("../images/sunrise.jpg");
   background-size: cover;
 }
 
-body {
-  background-color: #70B7BF;
+.btn-comment, .btn-delete, .btn-save {
+  float: right;
+  padding-bottom: 10px;
 }

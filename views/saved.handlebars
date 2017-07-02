@@ -5,9 +5,11 @@
       {{#if this.saved}}
     	  <div class="panel panel-default">
           <div class="panel-heading">
-            <h3>{{this.title}}</h3>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#commentModal">Comments</button>
-            <button type="button" class="btn btn-primary btn-lg btn-delete">Delete Article</button>
+            <h3>
+              {{this.title}}
+              <button type="button" class="btn btn-primary btn-lg btn-comment" data-toggle="modal" data-target="#commentModal" data-title="{{this.title}}">Comments</button>
+              <button type="button" class="btn btn-primary btn-lg btn-delete" data-title="{{this.title}}">Delete Article</button>
+            </h3>
           </div>
           <div class="panel-body"><a href="{{this.link}}">{{this.link}}</a></div>
         </div>
@@ -15,7 +17,7 @@
     {{/each}}
   </div>
 
-  <!-- Modal -->
+ {{!--  <!-- Modal -->
   <div class="modal fade" id="commentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -32,6 +34,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
 </div>

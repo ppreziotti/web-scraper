@@ -4,7 +4,10 @@
     {{#each Article}}
   	  <div class="panel panel-default">
         <div class="panel-heading">
-          <h3>{{this.title}}<button type="button" class="btn btn-primary btn-lg btn-save">Save Article</button></h3>
+          <h3>
+            {{this.title}}
+            <button type="button" class="btn btn-primary btn-lg btn-save" data-title="{{this.title}}">Save Article</button>
+          </h3>
         </div>
         <div class="panel-body"><a href="{{this.link}}">{{this.link}}</a></div>
       </div>

@@ -44,7 +44,7 @@ module.exports = function(app) {
   });
 
   app.get("/saved", function(req, res) {
-    Article.find({saved: true}, null, {sort: {scrapedDate: -1}})
+    Article.find({}, null, {sort: {scrapedDate: -1}})
     .populate("comment")
     .exec(function(error, articles) {
       if (error) {
