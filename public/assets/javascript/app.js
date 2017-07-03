@@ -30,10 +30,10 @@ $(document).ready(function() {
   }
 
   function postComment() {
-  	event.preventDefault();
+  	// event.preventDefault();
   	var title = $(this).data("title")
   	console.log(title);
-  	var comment = $("#comment-input").value();
+  	var comment = $("#comment-input").val();
   	console.log(comment);
 	$.ajax({
 	  method: "POST",

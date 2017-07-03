@@ -45,7 +45,7 @@ module.exports = function(app) {
   	    console.log(error)
   	  }
   	  else {
-  	  	Article.findOneAndUpdate({title: req.params.title}, {comment: doc._id})
+  	  	Article.findOneAndUpdate({title: req.params.title}, {comment: doc.body})
   	  	.exec(function(err, doc) {
   	  	  if (err) {
   	  	  	console.log(err);
@@ -56,5 +56,17 @@ module.exports = function(app) {
   		});
   	  }
   	});
+  });
+  
+  // Route for deleting an article from saved articles
+  app.delete("/api/articles/:title", function(req, res) {
+    Article.remove({title: req.params.title}, function(error) {
+      if (error) {
+        res.send(error);
+      }
+      else {
+        res.send("Article deleted!");
+      }
+    });
   });
 };

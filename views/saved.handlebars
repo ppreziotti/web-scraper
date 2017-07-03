@@ -17,16 +17,15 @@
         </div>
         <form>
           <div class="form-group">
-            {{#each Comment}}
-              <div>
-                <p>{{this.body}}</p>
-                <button type="submit">Delete Comment</button>
-              </div>
-            {{/each}}
+            <div class="comment-div">
+              <p>{{this.comment.body}}</p>
+              <button class="btn btn-comment-delete">X</button>
+            </div>
             <label for="comments">Enter a comment:</label>
             <input type="text" id="comment-input"></input>
             <button type="submit" class="btn btn-primary btn-lg btn-post-comment" data-title="{{this.title}}">Submit Comment</button>
           </div>
+        </form>
       {{/if}}
     {{/each}}
   </div>
