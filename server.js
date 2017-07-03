@@ -29,16 +29,17 @@ if (herokuDB) {
 else {
   // Establishing Mongoose database connection
   mongoose.connect("mongodb://localhost/scraper");
-  var db = mongoose.connection;
-  // Logging any Mongoose errors
-  db.on("error", function(error) {
-    console.log("Mongoose error: ", error);
-  });
-  // Logging success message once the databse is opened through Mongoose
-  db.once("open", function() {
-    console.log("Mongoose connection successful.");
-  });
 }
+
+var db = mongoose.connection;
+// Logging any Mongoose errors
+db.on("error", function(error) {
+  console.log("Mongoose error: ", error);
+});
+// Logging success message once the databse is opened through Mongoose
+db.once("open", function() {
+  console.log("Mongoose connection successful.");
+});
 
 // Set up handlebars, use main.handlebars as the default html layout, and establish handlebars as
 // the default templating engine
