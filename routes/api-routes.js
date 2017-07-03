@@ -20,10 +20,10 @@ module.exports = function(app) {
   	  	res.send(error);
   	  }
   	  else {
-  	  	res.send(article)
+  	  	res.send(article);
   	  }
-  	})
-  })
+  	});
+  });
 
   // Put route for updating saved status of article -- need to complete
   app.put("/api/articles/:title", function(req, res) {
@@ -40,32 +40,20 @@ module.exports = function(app) {
   // Post route for adding a comment to an article
   app.post("/api/articles/:title", function(req, res) {
   	var newComment = new Comment(req.body);
-
   	newComment.save(function(error, doc) {
   	  if (error) {
   	    console.log(error)
   	  }
   	  else {
-  	  	Article.findOneAndUpdate({title: req.params.title}, {comment: req.body.data})
+  	  	Article.findOneAndUpdate({title: req.params.title}, {comment: doc._id})
   	  	.exec(function(err, doc) {
   	  	  if (err) {
   	  	  	console.log(err);
   	  	  }
-  	  	  else {
-  	  	  	res.send(doc);
-  	  	  }
-  	  	});
-  	  }
-  	});
-  });
-
-  app.delete("/api/articles/:title", function(req, res) {
-  	Article.remove({title: req.params.title}, function(error) {
-  	  if (error) {
-  	  	res.send(error);
-  	  }
-  	  else {
-  	  	res.send("Article deleted!");
+	  	  else {
+	  	  	res.send(doc);
+	  	  }
+  		});
   	  }
   	});
   });

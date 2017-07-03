@@ -30,11 +30,16 @@ $(document).ready(function() {
   }
 
   function postComment() {
-  	var title = $(this).data("title");
+  	event.preventDefault();
+  	var title = $(this).data("title")
+  	console.log(title);
+  	var comment = $("#comment-input").value();
+  	console.log(comment);
 	$.ajax({
 	  method: "POST",
 	  url: "/api/articles/" + title,
 	  data: {
+	  	title: title,
 	    body: $("#comment-input").val()
    	  }
 	}).done(function(data) {

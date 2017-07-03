@@ -17,9 +17,14 @@
         </div>
         <form>
           <div class="form-group">
-            <p>{{this.title}}</p>
-            <label for="exampleTextarea">Example textarea</label>
-            <textarea class="form-control" id="comment-input" rows="3"></textarea>
+            {{#each Comment}}
+              <div>
+                <p>{{this.body}}</p>
+                <button type="submit">Delete Comment</button>
+              </div>
+            {{/each}}
+            <label for="comments">Enter a comment:</label>
+            <input type="text" id="comment-input"></input>
             <button type="submit" class="btn btn-primary btn-lg btn-post-comment" data-title="{{this.title}}">Submit Comment</button>
           </div>
       {{/if}}
