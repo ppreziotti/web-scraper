@@ -9,7 +9,7 @@ mongoose.Promise = Promise;
 
 // Initialize express
 var app = express();
-var PORT = 3000;
+var PORT = process.env.MONGODB_URI || 3000;
 
 // Setting up body parser
 app.use(bodyParser.urlencoded({
