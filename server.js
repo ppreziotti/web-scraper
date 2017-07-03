@@ -9,7 +9,8 @@ mongoose.Promise = Promise;
 
 // Initialize express
 var app = express();
-var PORT = process.env.MONGODB_URI || 3000;
+var PORT = process.env.PORT || 3000;
+var uriString = process.env.MONGODB_URI || "mongodb://localhost/scraper";
 
 // Setting up body parser
 app.use(bodyParser.urlencoded({
@@ -19,18 +20,7 @@ app.use(bodyParser.urlencoded({
 // Making the public directory static
 app.use(express.static("public"));
 
-// Establishing Heroku MLAB database connection
-var herokuDB = process.env.MONGODB_URI;
-
-if (herokuDB) {
-  mongoose.connect(herokuDB);
-}
-
-else {
-  // Establishing Mongoose database connection
-  mongoose.connect("mongodb://localhost/scraper");
-}
-
+mongoose.connect(uriString);
 var db = mongoose.connection;
 // Logging any Mongoose errors
 db.on("error", function(error) {
