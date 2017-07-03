@@ -19,19 +19,26 @@ app.use(bodyParser.urlencoded({
 // Making the public directory static
 app.use(express.static("public"));
 
-// Establishing Mongoose database connection
-mongoose.connect("mongodb://localhost/scraper");
-var db = mongoose.connection;
+// Establishing Heroku MLAB database connection
+var herokuDB = process.env.MONGODB_URI;
 
-// Logging any Mongoose errors
-db.on("error", function(error) {
-  console.log("Mongoose error: ", error);
-});
+if (herokuDB) {
+  mongoose.connect(herokuDB);
+}
 
-// Logging success message once the databse is opened through Mongoose
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
+else {
+  // Establishing Mongoose database connection
+  mongoose.connect("mongodb://localhost/scraper");
+  var db = mongoose.connection;
+  // Logging any Mongoose errors
+  db.on("error", function(error) {
+    console.log("Mongoose error: ", error);
+  });
+  // Logging success message once the databse is opened through Mongoose
+  db.once("open", function() {
+    console.log("Mongoose connection successful.");
+  });
+}
 
 // Set up handlebars, use main.handlebars as the default html layout, and establish handlebars as
 // the default templating engine
