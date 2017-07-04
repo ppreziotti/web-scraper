@@ -18,7 +18,9 @@
         <form>
           <div class="form-group">
             <div class="comment-div">
-              <p>{{this.comment.body}}</p>
+              {{#if this.comment}}
+                <p>{{this.comment.body}}</p>
+              {{/if}}
               <button class="btn btn-comment-delete">X</button>
             </div>
             <label for="comments">Enter a comment:</label>
