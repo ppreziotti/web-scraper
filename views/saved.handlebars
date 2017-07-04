@@ -7,8 +7,7 @@
           <div class="panel-heading">
             <h3>
               {{this.title}}
-              <button type="button" class="btn btn-primary btn-lg btn-comment" data-title="{{this.title}}">Comments</button>
-              <button type="button" class="btn btn-primary btn-lg btn-delete" data-title="{{this.title}}">Delete Article</button>
+              <button type="button" class="btn btn-primary btn-lg btn-delete" data-title="{{this.title}}">Delete from Saved Articles</button>
             </h3>
           </div>
           <div class="panel-body">
@@ -21,7 +20,7 @@
               {{#if this.comment}}
                 <p>{{this.comment.body}}</p>
               {{/if}}
-              <button class="btn btn-comment-delete">X</button>
+              <button type="button" class="btn btn-delete-comment" data-title="{{this.title}}">X</button>
             </div>
             <label for="comments">Enter a comment:</label>
             <input type="text" id="comment-input"></input>

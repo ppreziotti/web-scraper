@@ -31,23 +31,36 @@ $(document).ready(function() {
 
   function postComment() {
   	// event.preventDefault();
-  	var title = $(this).data("title")
+  	var title = $(this).data("title");
   	console.log(title);
   	var comment = $("#comment-input").val();
   	console.log(comment);
-	$.ajax({
-	  method: "POST",
-	  url: "/api/articles/" + title,
-	  data: {
-	  	title: title,
-	    body: $("#comment-input").val()
-   	  }
-	}).done(function(data) {
-	  console.log(data);
-	});
+  	$.ajax({
+  	  method: "POST",
+  	  url: "/api/articles/" + title,
+  	  data: {
+  	  	title: title,
+  	    body: $("#comment-input").val()
+     	  }
+  	}).done(function(data) {
+  	  console.log(data);
+      location.reload();
+  	});
+  }
+
+  function deleteComment() {
+    var title = $(this).data("title");
+    $.ajax({
+      method: "DELETE",
+      url: "/api/comments/" + title,
+    }).done(function(data) {
+      console.log(data);
+      location.reload();
+    });
   }
 
   $(document).on("click", ".btn-save", saveArticle);
   $(document).on("click", ".btn-delete", deleteArticle);
   $(document).on("click", ".btn-post-comment", postComment);
+  $(document).on("click", ".btn-delete-comment", deleteComment);
 });

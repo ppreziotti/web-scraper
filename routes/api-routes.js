@@ -69,4 +69,16 @@ module.exports = function(app) {
       }
     });
   });
+
+  // Route for deleting a comment
+  app.delete("/api/comments/:title", function(req, res) {
+    Comment.remove({title: req.params.title}, function(error) {
+      if (error) {
+        res.send(error);
+      }
+      else {
+        res.send("Comment removed!");
+      }
+    });
+  });
 };
